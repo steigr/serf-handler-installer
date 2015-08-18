@@ -9,4 +9,4 @@ url=${handler_info#*@}
 
 [[ "x$name" = "x$url" ]] && name=""
 
-install_handler "$name" "$url"
+install_handler "$name" "$url" &>/dev/null &
