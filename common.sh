@@ -20,6 +20,12 @@ list_installed_handlers() {
 	done
 }
 
+update_handlers() {
+	find /run/serf/handlers/* -maxdepth 1 -type d -name .git | xargs dirname | while read handler; do
+		( cd $handler; git pull origin master )
+	done
+}
+
 install_handler() {
 	name=$1
 	url=$2
