@@ -23,6 +23,7 @@ list_installed_handlers() {
 install_handler() {
 	name=$1
 	url=$2
+	[[ "x$name" = "x" ]] && name=$(basename $url | sed -e "s:\.git$::" )
 	cd $handler_dir
 	test -d $name && test -d $name/.git && ( cd $name; git pull )
 	test -d $name || git clone $url $name
