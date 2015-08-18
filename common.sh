@@ -1,5 +1,10 @@
 handler_dir=/run/serf/handlers
 
+tag_with_value() {
+	[[ "x$1" = "xadd" ]] && serf tags -set $2=$3
+	[[ "x$1" = "xdel" ]] && serf tags -delete $2
+}
+
 known_handlers() {
 	serf query -format=json installed-handlers \
 	| jq '.Responses | to_entries | .[].value' \
@@ -24,6 +29,7 @@ update_handlers() {
 	find /run/serf/handlers/* -maxdepth 1 -type d -name .git | xargs dirname | while read handler; do
 		( cd $handler; git pull origin master )
 	done
+	tag_with_value add handlers=$(date +%s)
 }
 
 install_handler() {
@@ -33,4 +39,5 @@ install_handler() {
 	cd $handler_dir
 	test -d $name && test -d $name/.git && ( cd $name; git pull )
 	test -d $name || git clone $url $name
+	tag_with_value add handlers=$(date +%s)
 }

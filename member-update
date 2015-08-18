@@ -1,9 +1,0 @@
-#!/bin/sh
-
-source $(dirname $0)/common.sh
-
-grep $(hostname) >/dev/null || exit 0
-
-known_handlers | while read handler_info; do
-	install_handler "${handler_info%@*}" "${handler_info#*@}"
-done
