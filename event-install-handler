@@ -2,5 +2,11 @@
 
 source $(dirname $0)/common.sh
 
-handler=$(cat)
-install_handler ${handler_info%@*} ${handler_info#*@}
+handler_info=$(cat)
+
+name=${handler_info%@*}
+url=${handler_info#*@}
+
+[[ "x$name" = "x$url" ]] && name=""
+
+install_handler "$name" "$url"
