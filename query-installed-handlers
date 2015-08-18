@@ -1,0 +1,5 @@
+#!/bin/sh
+
+source $(dirname $0)/common.sh
+
+echo -n $(list_installed_handlers)

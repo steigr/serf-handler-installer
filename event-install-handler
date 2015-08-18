@@ -1,0 +1,6 @@
+#!/bin/sh
+
+source $(dirname $0)/common.sh
+
+handler=$(cat)
+install_handler ${handler_info%@*} ${handler_info#*@}
