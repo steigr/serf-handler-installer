@@ -2,4 +2,4 @@
 
 source $(dirname $0)/common.sh
 
-update_handlers
+update_handlers &>/dev/null&
